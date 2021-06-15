@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+<div class="container">
+    <div class="row">
+    <div class="col-md-9">
+        <h2>ユーザー設定</h2>
+    </div>
+    <div class="col-md-3" style="text-align: right">
+        <a class="btn btn-primary" href="{% url 'scraping:fbpage_update' page.pk %}">編集</a>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-12">
+        <ul class="listgroup" style="padding-left: 0;">
+        <li class="list-group-item">
+            <i class="fas fa-flag"></i>注目状況：
+            
+            注目しない
+            
+        </li>
+        </ul>
+    </div>
+    </div>
+</div>
+</section>
+{% endblock content %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form-inline">{% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" type="text" name="freetext" placeholder="Facebookページ名" value="">
+                </div>
+                <div class="checkbox">
+                    <label>
+                    <input type="checkbox" name="is_notice"> 注目のみ
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">検索</button>
+            </form>
+        </div>
+        <div class="col-md-3 offset-md-3 text-right">
+            <a class="btn btn-primary" href="/fbpage/create">Facebookページ追加</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Facebookページ名</th>
+                    <th scope="col">いいね数</th>
+                    <th scope="col">カテゴリ名</th>
+                    <th scope="col">注目状況</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for page in object_list %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'scraping:fbpage_detail' page.pk %}">{{page.name}}</a>
+                        </td>
+                        <td>{{page.scraped_at}}</td>
+                        <td>{{page.category}}</td>
+                        <td>
+                            {% if page.is_notable %}
+                            <i class="fas fa-flag"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div>
+    {% if is_paginated %}
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+        <li class="disabled"><span class="page-link">&laquo;</span></li>
+        {% endif %}
+        
+        {% for i in paginator.page_range %}
+        {% if page_obj.number == i %}
+        <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        
+        {% if page_obj.has_next %}
+        <li><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% else %}
+        <li class="disabled"><span class="page-link">&raquo;</span></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+</div>
+
+{% endblock content %}

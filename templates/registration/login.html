@@ -1,0 +1,49 @@
+{% extends 'registration/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+
+<div class="login-page">
+    <div class="login-logo">
+        <a href="index2.html"><b>MODE</b>TOOL</a>
+    </div>
+    <div class="card" style="padding: 20px; width:360px;">
+        <p class="login-box-msg"> Login to start your session</p>
+        <form action="" method="POST">
+            <div>
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                <div style="display: flex;">
+                    {{ field.label_tag }}
+                    {{ field | add_class:'form-control'}}
+                </div>
+                {{ field.errors }}
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <div class="icheck-primary">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">
+                            Remember Me
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </div>
+                <!-- /.col -->
+            </div>
+            {% csrf_token %}
+        </form>
+        <p class="mb-1">
+            <a href="forgot-password.html">I forgot my password</a>
+        </p>
+        <p class="mb-0">
+            <a href="register.html" class="text-center">Register a new membership</a>
+        </p>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <p>ようこそdemoさん</p>
+        <div class="lead"><a href="{% url 'scraping:fbpage' %}">Fbpage一覧</a></div>
+        <p>登録したFbpageの一覧で、登録の新しい順に並んでいます。リンク先は公式の広告ライブラリに遷移します。</p>
+        <div class="lead"><a href="{% url 'scraping:fbpage_create' %}">Fbpage IDの登録</a></div>
+        <p>スクレイピング対象のFbpageのID登録画面です。</p>
+        <div class="lead"><a href="{% url 'scraping:ad' %}">広告一覧</a></div>
+        <p>広告の全一覧です。</p>
+        <div class="lead"><a href="{% url 'scraping:ad_sorted_by_date' %}">日付で広告をソート</a></div>
+        <p>日付でソートした上で、Fbpageで選べるようにしています。</p>
+        <div class="lead"><a href="{% url 'scraping:ad_sorted_by_fbpage' %}">Fbpageで広告をソート</a></div>
+        <p>Fbpageでソートした上で、日付で選べるようにしています。</p>
+        <div class="lead"><a href="{% url 'scraping:lp_list' %}">記事LPの登録数順</a></div>
+        <p>記事LPのURL登録数が多い順に並べています。露出量の多い記事LPがチェックできます。</p>
+        <div class="lead"><a href="{% url 'scraping:ad_favorite_list' %}">お気に入り</a></div>
+        <p>お気に入りに入れた一覧です。</p>
+        <div class="lead"><a href="{% url 'scraping:ad_memo' %}">メモ</a></div>
+        <p>メモを記入した一覧です。</p>
+        <p>
+            <a href="{% url 'logout' %}">
+                <button type="button" class="btn btn-primary btn-sm">ログアウト</button>
+            </a>
+        </p>
+    </div>
+{% endblock content %}

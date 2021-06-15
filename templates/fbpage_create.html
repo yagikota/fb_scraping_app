@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <form method="POST">{% csrf_token %}
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>
+                        <label for="id_fbpage_id">Fbpage id:</label>
+                    </th>
+                    <td>
+                        {{form}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary" type="submit">追加</button>
+    </form>
+</div>
+{% endblock content %}

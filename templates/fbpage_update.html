@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+    <h1>編集</h1>
+    <form method="POST">{% csrf_token %}
+        <ul class="listgroup">
+            <li class="list-group-item">FBページID：{{page.page_id}}</li>
+            <li class="list-group-item">FBページ名：{{page.name}}<a href="https://www.facebook.com/ads/library/?active_status=all&amp;ad_type=all&amp;country=ALL&amp;impression_search_field=has_impressions_lifetime&amp;view_all_page_id={{page.page_id}}" target="_blank" rel="noopener noreferrer">None</a></li>
+            <li class="list-group-item">いいね数：{{page.likes}}</li>
+            <li class="list-group-item">カテゴリ：{{page.category}}</li>
+        </ul>
+        <table class="table">
+            <tbody>
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                <tr>
+                    <th>{{ field.label_tag }}</th>
+                    <td>{{ field | add_class:'form-control'}}</td>
+                    {{ field.errors }}
+                </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn btn-primary" type="submit">保存</button>
+    </form>
+</div>
+{% endblock content %}

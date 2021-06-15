@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+    <h1>編集</h1>
+
+    <ul class="listgroup">
+        <li class="list-group-item">FB広告ID：{{object.ad_id}}</li>
+        <li class="list-group-item">広告開始日：</li>
+        
+        <li class="list-group-item">ステータス：<i class="fas fa-toggle-off"></i> {{object.status}}</li>
+        
+        <li class="list-group-item">本文：{{object.main_text}}</li>
+        <li class="list-group-item">サブテキスト：{{object.sub_text}}</li>
+        <li class="list-group-item">サイト名：so-tool.com</li>
+        <li class="list-group-item">CTA：購入する</li>
+        
+        <li class="list-group-item"><a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">https://www.google.com/</a></li>
+        
+        
+        <li class="list-group-item"><img src="{{object.image.url}}" width="250&quot;&quot;">
+        </li>
+        
+        <li class="list-group-item">取得日：2019年12月19日</li>
+    </ul>
+    <form method="POST">{% csrf_token %}
+    <table class="table">
+        <tbody>
+            {{ form.non_field_errors }}
+            {% for field in form %}
+            <tr>
+                <th>{{ field.label_tag }}</th>
+                <td>{{ field | add_class:'form-control'}}</td>
+                {{ field.errors }}
+            </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+        <button class="btn btn-primary" type="submit">保存</button>
+    </form>
+</div>
+{% endblock content %}

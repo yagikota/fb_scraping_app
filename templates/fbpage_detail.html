@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+<div class="container">
+    <div class="row">
+    <div class="col-md-8">
+        <div>テスト</div>
+    </div>
+    <div class="col-md-4" style="text-align: right">
+        <a class="btn btn-info btn-sm" href="https://www.facebook.com/ads/library/?active_status=all&amp;ad_type=all&amp;country=ALL&amp;impression_search_field=has_impressions_lifetime&amp;view_all_page_id={{page.page_id}}" target="_blank" rel="noopener noreferrer">
+        広告ライブラリへ</a>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-12">
+        <ul class="listgroup" style="padding-left: 0;">
+        <li class="list-group-item">FBページID：{{page.page_id}}</li>
+        <li class="list-group-item">カテゴリ：{{page.category}}</li>
+        <li class="list-group-item">いいね数：{{page.likes}}</li>
+        </ul>
+    </div>
+    </div>
+</div>
+</section>
+<section>
+<div class="container">
+    <div class="row">
+    <div class="col-md-9">
+        <h2>ユーザー設定</h2>
+    </div>
+    <div class="col-md-3" style="text-align: right">
+        <a class="btn btn-primary" href="{% url 'scraping:fbpage_update' page.pk %}">編集</a>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-12">
+        <ul class="listgroup" style="padding-left: 0;">
+        <li class="list-group-item">
+            <i class="fas fa-flag"></i>
+            <span>注目状況：</span>
+            {% if page.is_notable %}
+                <span>注目する</span>
+            {% else %}
+                <span>注目しない</span>
+            {% endif %}
+            
+        </li>
+        </ul>
+    </div>
+    </div>
+</div>
+</section>
+
+<section>
+<div class="container">
+    <h2>関連する広告</h2>
+    <div class="row">
+        {% for ad in object_list %}
+        <div class="col-12 col-sm-6 col-md-4">
+        <div class="card">
+            <div class="card-header">
+            
+            <span><i class="fas fa-toggle-off"></i> {{ad.status}}</span>
+            
+            <br>
+            <span>掲載開始日:2019/12/01</span>
+            <br>
+            <span>ID:<a href="/ad/sorted_fbad_id?fbad_id=1111111114">{{ad.ad_id}}</a></span>
+            </div>
+            <div class="card-body">
+            <p class="card-title mb-3"><a href="https://www.facebook.com/ads/library/?active_status=all&amp;ad_type=all&amp;country=ALL&amp;impression_search_field=has_impressions_lifetime&amp;view_all_page_id=105178707637464" rel="noopener noreferrer" target="_blank">{{ad.parent.category}}</a>
+            </p>
+            <p class="card-text">{{ad.main_text}}</p>
+            </div>
+            
+            <div class="card-body">
+            <a href="{{ad.image_url}}">画像・動画</a>
+            </div>
+            
+        
+            <div class="card-body">
+            <p class="card-subtitle mb-3 text-muted">{{ad.sub_text}}</p>
+            <p class="card-subtitle mb-2 text-muted"></p>
+            <p class="card-text mb-2 text-muted">so-tool.com</p>
+            
+            <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer"><button type="button" class="btn btn-secondary btn-sm">Shop Now</button></a>
+            
+        
+            </div>
+            <div class="card-footer">
+            <p>
+                <span>取得日:{{ad.parent.scraped_at}}</span><br>
+                
+                <span>LP:
+                <a class="card-link" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">URL</a>
+                </span>
+            </p>
+            <p>{{ad.memo}}</p>
+            <p>
+                <a href="{% url 'scraping:ad_update' ad.pk %}"><button class="btn btn-primary" type="submit">編集</button></a>
+            </p>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div>
+        {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+            <li class="disabled"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+            
+            {% for i in paginator.page_range %}
+            {% if page_obj.number == i %}
+            <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            
+            {% if page_obj.has_next %}
+            <li><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="disabled"><span class="page-link">&raquo;</span></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+</section>
+
+
+{% endblock content %}
