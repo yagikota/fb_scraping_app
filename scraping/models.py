@@ -24,6 +24,7 @@ class Advertisement(models.Model):
     sub_text = models.CharField(max_length=200, null=True)# ?
     ad_id = models.IntegerField(null=True, blank=True, default=0)
     image_url = models.CharField(max_length=500, null=True)
+    lp_url = models.CharField(max_length=500, null=True)
     memo = models.TextField(max_length=500, null=True, blank=True)
     scraped_at = models.DateTimeField(auto_now_add=True)
     is_favorite  = models.BooleanField(default=False)

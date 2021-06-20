@@ -77,11 +77,11 @@ class Command(BaseCommand):
                     image_url = ad.find("video")
                     if image_url is not None:
                         image_url = ad.find("video").get("src")
-
+                lp_url = ad.find("a", class_="d5rc5kzv chuaj5k6 l61y9joe j8otv06s a1itoznt fvlrrmdj svz86pwt aa8h9o0m jrvjs1jy jrkk970q").get("href")
                 # if ad_id in ad_ids:
                 #     Advertisement.objects.filter(ad_id=ad_id).update(parent=parent, status = status, started_running_on = started_running_on, main_text=main_text, image_url=image_url)
                 # else:
-                Advertisement.objects.create(parent=parent, status = status, started_running_on = started_running_on, main_text=main_text, ad_id=ad_id, image_url=image_url)
+                Advertisement.objects.create(parent=parent, status = status, started_running_on = started_running_on, main_text=main_text, ad_id=ad_id, image_url=image_url, lp_url=lp_url)
 
                 print(ad_id)
                 print(main_text)

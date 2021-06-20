@@ -36,18 +36,20 @@
                 </thead>
                 <tbody>
                     {% for page in object_list %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'scraping:fbpage_detail' page.pk %}">{{page.name}}</a>
-                        </td>
-                        <td>{{page.scraped_at}}</td>
-                        <td>{{page.category}}</td>
-                        <td>
-                            {% if page.is_notable %}
-                            <i class="fas fa-flag"></i>
-                            {% endif %}
-                        </td>
-                    </tr>
+                        {% if page.name is not None %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'scraping:fbpage_detail' page.pk %}">{{page.name}}</a>
+                            </td>
+                            <td>{{page.likes}}</td>
+                            <td>{{page.category}}</td>
+                            <td>
+                                {% if page.is_notable %}
+                                <i class="fas fa-flag"></i>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endif %}
                     {% endfor %}
                 </tbody>
             </table>

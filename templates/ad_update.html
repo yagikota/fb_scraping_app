@@ -24,18 +24,18 @@
         <li class="list-group-item">取得日：2019年12月19日</li>
     </ul>
     <form method="POST">{% csrf_token %}
-    <table class="table">
-        <tbody>
-            {{ form.non_field_errors }}
-            {% for field in form %}
-            <tr>
-                <th>{{ field.label_tag }}</th>
-                <td>{{ field | add_class:'form-control'}}</td>
+        <table class="table">
+            <tbody>
+                {{ form.non_field_errors }}
+                    {% for field in form %}
+                <tr>
+                    <th>{{ field.label_tag }}</th>
+                    <td>{{ field | add_class:'form-control'}}</td>
                 {{ field.errors }}
-            </tr>
-                {% endfor %}
-            </tbody>
-    </table>
+                </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
         <button class="btn btn-primary" type="submit">保存</button>
     </form>
 </div>

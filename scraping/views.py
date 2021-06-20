@@ -1,10 +1,11 @@
+from typing import Counter
 from django.db import models
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DetailView, DeleteView
 from .models import Advertisement, Page
 from django.urls import reverse_lazy
 from django.views.generic.list import MultipleObjectMixin
-
+from collections import Counter
 # Create your views here.
 
 class DashBoardView(TemplateView):
@@ -72,6 +73,17 @@ class AdSoretedByFBPageView(ListView):
 
 class LPListView(TemplateView):
     template_name = "lp_list.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        lp_urls = []
+        for ad in Advertisement.objects.all():
+            lp_urls.append(ad.lp_url)
+        count = Counter(lp_urls)
+        count_lp_url = []
+        for key, val in count.items():
+            count_lp_url.append([key,val])
+        context['count_lp_url'] = count_lp_url
+        return context
 
 class AdMemoView(ListView):
     template_name = "ad_memo.html"
@@ -84,5 +96,3 @@ class AdFavoriteListView(ListView):
     model = Advertisement
     context_object_name = 'advertisements'
     paginate_by = 12
-
-

@@ -10,11 +10,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-            <td><a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">https://www.google.com/</a></td>
-            <td>3</td>
-            </tr>
+                {% for count in count_lp_url %}
+                    <tr>
+                        <td>
+                            <a href="{{count.0}}" target="_blank" rel="noopener noreferrer">{{count.0|truncatechars:100}}</a>
+                        </td>
+                        <td>{{count.1}}</td>
+                    </tr>
+                {% endfor %}
+
         </tbody>
     </table>
 </div>
+
 {% endblock content %}

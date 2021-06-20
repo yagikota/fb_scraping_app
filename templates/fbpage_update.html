@@ -13,11 +13,11 @@
         <table class="table">
             <tbody>
                 {{ form.non_field_errors }}
-                {% for field in form %}
+                    {% for field in form %}
                 <tr>
                     <th>{{ field.label_tag }}</th>
                     <td>{{ field | add_class:'form-control'}}</td>
-                    {{ field.errors }}
+                {{ field.errors }}
                 </tr>
                     {% endfor %}
             </tbody>
