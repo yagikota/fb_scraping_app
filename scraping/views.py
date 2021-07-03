@@ -14,7 +14,7 @@ class DashBoardView(TemplateView):
 class FBPageView(ListView):
     template_name = "fbpage.html"
     paginate_by = 10
-    page_num = Page.objects.values('page_id').annotate(latest=models.Min('scraped_at')).count()
+    page_num = Page.objects.only('page_id').annotate(latest=models.Min('scraped_at')).count()
     queryset = Page.objects.all()[::-1][:page_num]
 
 class FBPageCreateView(CreateView):

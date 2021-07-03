@@ -4,7 +4,7 @@ from django.db.models.deletion import CASCADE
 # Create your models here.
 
 class Page(models.Model):
-    name = models.CharField(max_length=100, null = True)
+    name = models.CharField(max_length=100, default='pagename')
     page_id = models.IntegerField(null=True, blank=True)
     likes = models.IntegerField(null=True, blank=True, default=0)
     category = models.CharField(max_length=200, null=True)
@@ -29,5 +29,5 @@ class Advertisement(models.Model):
     scraped_at = models.DateTimeField(auto_now_add=True)
     is_favorite  = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.main_text[:30]
+    # def __str__(self):
+    #     return self.main_text[:30]
