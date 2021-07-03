@@ -13,11 +13,13 @@
         </thead>
         <tbody>
             {% for page in pages %}
-            <tr>
-                <td>{{page.scraped_at}}</td>
-                <td><a href="/page/sorted_detail?check_date=2019-12-18&amp;fbpage_id=105178707637464">{{ page.name }}</a>
-                </td>
-            </tr>
+                {% if page.name %}
+                <tr>
+                    <td>{{page.scraped_at}}</td>
+                    <td><a href="/page/sorted_detail?check_date=2019-12-18&amp;fbpage_id=105178707637464">{{ page.name }}</a>
+                    </td>
+                </tr>
+                {% endif %}
             {% endfor %}
         </tbody>
     </table>
