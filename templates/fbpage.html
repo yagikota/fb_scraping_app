@@ -36,13 +36,13 @@
                 </thead>
                 <tbody>
                     {% for page in object_list %}
-                        {% if page.name is not None %}
+                        {% if page.name %}
                         <tr>
                             <td>
                                 <a href="{% url 'scraping:fbpage_detail' page.pk %}">{{page.name}}</a>
                             </td>
                             <td>{{page.likes}}</td>
-                            <td>{{page.category}}</td>
+                            <td>{{page.scraped_at}}</td>
                             <td>
                                 {% if page.is_notable %}
                                 <i class="fas fa-flag"></i>
